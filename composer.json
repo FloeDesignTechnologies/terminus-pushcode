@@ -1,0 +1,26 @@
+{
+    "name": "floe/terminus-pushcode",
+    "description": "Terminus Plugin to push code from current working directory to Pantheon",
+    "type": "terminus-plugin",
+    "license": "AGPL-3.0",
+    "authors": [
+        {
+            "name": "Pierre Buyle",
+            "email": "buyle@floe.ca"
+        }
+    ],
+    "require-dev": {
+        "phpspec/phpspec": "^3.2",
+        "pantheon-systems/terminus": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Floe\\Terminus\\": ["src"]
+        }
+    },
+    "extra": {
+        "terminus": {
+            "compatible-version": "1.*"
+        }
+    }
+}

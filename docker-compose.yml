@@ -1,0 +1,21 @@
+version: '2'
+services:
+
+  # Container to run cli applications (composer, etc.)
+  composer:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        USER_UID: ${USER_UID}
+        USER: ${USER}
+    volumes:
+      - .:/home/${USER}/.terminus/plugins/push-code:rw
+      # Share the local user's composer cache as a Docker volume
+      - ~/.composer/cache:/composer/cache:rw
+
+  # Container to run a shell
+  shell:
+    extends:
+      service: composer
+    entrypoint: bash
