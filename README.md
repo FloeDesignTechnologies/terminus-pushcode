@@ -9,6 +9,11 @@ Instead, the main Git repository contains sources used to build what needs to be
 using Composer without commiting the vendor directory). This command can then be used after a complete build to
 push its result to a Pantheon environment.
 
+## Configuration
+
+When pushing code to Pantheon, using Git, the command rely on a `.pantheonignore` file in the current folder. This
+file list the files and directories to ignore while pushing chnages to Pantheon ()just like a `.gitignore` file).
+
 ## Help
 
 Run `terminus help push-code` to get help.
