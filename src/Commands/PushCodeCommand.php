@@ -141,7 +141,7 @@ class PushCodeCommand extends TerminusCommand implements SiteAwareInterface, Bui
         // to push the branch up to the existing site.
         if ($site->getEnvironments()->has($env)) {
             // Get a reference to our target site.
-            $this->connectionSet($env, 'git');
+            $this->connectionSet($site->getEnvironments()->get($env), 'git');
         }
 
         // The URL of the Pantheon git repo for the site.
