@@ -216,7 +216,7 @@ class PushCodeCommand extends TerminusCommand implements SiteAwareInterface, Bui
                      ->depth('> 0')
                      ->name('.git')
             as $dir) {
-            $git_stack->add('"' . substr($dir->getRelativePath(), 0, -4) . '"');
+            $git_stack->add('"' . $dir->getRelativePath() . '/"');
         }
         $git_stack
             ->exec(['add', '--all', '.'])
