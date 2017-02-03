@@ -36,57 +36,13 @@ class PushCodeCommand extends TerminusCommand implements SiteAwareInterface, Bui
     use \Robo\Task\Vcs\loadTasks;
 
     /**
-     * Returns the current Git branch.
-     *
-     * Use the `GIT_BRANCH` environment variable if set. Otherwise will use a git
-     * command.
-     *
-     * @param bool $required
-     *   Whether or not to throw an exception if the current Git branch cannot be
-     *   retrieved, defaults to TRUE.
-     *
-     * @return string
-     */
-    protected function getGitBranch($required = TRUE)
-    {
-        $branch = getenv('GIT_BRANCH');
-        if (!$branch) {
-            $branch = exec('git symbolic-ref --short -q HEAD');
-        }
-        if ($required && !$branch) throw new \RuntimeException('Unable to get the current Git branch, fix your working copy or set GIT_BRANCH');
-        return trim($branch);
-    }
-
-    /**
-     * Returns the current Git commit hash.
-     *
-     * Use the `GIT_COMMIT` environment variable if set. Otherwise will use a git
-     * command.
-     *
-     * @param bool $required
-     *   Whether or not to throw an exception if the current Git commit hash
-     *   cannot be retrieved, defaults to TRUE.
-     *
-     * @return string
-     */
-    protected function getGitCommitHash($required = TRUE)
-    {
-        $git_ref = getenv('GIT_COMMIT');
-        if (!$git_ref) {
-            $git_ref = exec('git rev-parse HEAD');
-        }
-        if ($required && !$git_ref) throw new \RuntimeException('Unable to get the current Git commit hash, fix your working copy or set GIT_COMMIT');
-        return trim($git_ref);
-    }
-
-    /**
      * Set the connection mode to 'sftp' or 'git' mode, and wait for
      * it to complete.
      *
      * @param Environment $env
      * @param string $mode
      */
-    public function connectionSet($env, $mode)
+    protected function connectionSet($env, $mode)
     {
         $workflow = $env->changeConnectionMode($mode);
         if (is_string($workflow)) {
@@ -168,9 +124,9 @@ class PushCodeCommand extends TerminusCommand implements SiteAwareInterface, Bui
         if (empty($site) || empty($env)) {
             throw new TerminusException('The environment argument must be given as <site_name>.<environment>');
         }
-        if (in_array($env, ['test', 'live',])) {
+        if (in_array($env, ['test', 'live'])) {
             throw new TerminusException(
-                'Connection push code to the {env} environment',
+                'Cannot push code to the {env} environment',
                 ['env' => $env->id,]
             );
         }
@@ -178,21 +134,12 @@ class PushCodeCommand extends TerminusCommand implements SiteAwareInterface, Bui
         /** @var Site $site */
         $site = $this->getSite($site);
 
-        // The current Git branch
-        $src_branch = $this->getGitBranch();
-
         // The branch to push to
         $dest_branch = $env == 'dev' ? 'master' : $env;
 
-        // The current Git ref
-        $git_ref = $this->getGitCommitHash();
-
-        // Check to see if the environment exists
-        $environmentExists = $site->getEnvironments()->has($env);
-
         // If the environment does exist, then we need to be in git mode
         // to push the branch up to the existing site.
-        if ($environmentExists) {
+        if ($site->getEnvironments()->has($env)) {
             // Get a reference to our target site.
             $this->connectionSet($env, 'git');
         }
@@ -217,9 +164,6 @@ class PushCodeCommand extends TerminusCommand implements SiteAwareInterface, Bui
         else {
             $commit_msg = "";
         }
-        $commit_msg .= "\n\n$src_branch:$git_ref";
-        $commit_msg = trim($commit_msg);
-
 
         if (!file_exists('.pantheonignore')) {
             $this->log()->warning("Creating missing .pantheonignore file.");
