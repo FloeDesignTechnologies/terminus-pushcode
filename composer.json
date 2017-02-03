@@ -10,12 +10,11 @@
         }
     ],
     "require-dev": {
-        "phpspec/phpspec": "^3.2",
         "pantheon-systems/terminus": "^1.0"
     },
     "autoload": {
         "psr-4": {
-            "Floe\\Terminus\\": ["src"]
+            "Floe\\Terminus\\": "src"
         }
     },
     "extra": {

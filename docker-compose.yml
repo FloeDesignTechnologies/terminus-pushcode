@@ -13,7 +13,11 @@ services:
       - .:/home/${USER}/.terminus/plugins/push-code:rw
       # Share the local user's composer cache as a Docker volume
       - ~/.composer/cache:/composer/cache:rw
-
+      # Share the local user's terminus cache as a Docker volume
+      - ~/.terminus/cache:/home/${USER}/.terminus/cache:rw
+      # Share the local user's SSH keys and configuration (read-only, except known_hosts)
+      - ~/.ssh:/home/${USER}/.ssh:ro
+      - ~/.ssh/known_hosts:/home/${USER}/.ssh/known_hosts:rw
   # Container to run a shell
   shell:
     extends:
