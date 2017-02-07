@@ -1,6 +1,6 @@
 # Terminus Push Code
 
-[![Terminus v1.x Compatible](https://img.shields.io/badge/terminus-v1.x-green.svg)](https://github.com/pantheon-systems/terminus-build-tools-plugin/tree/1.x)
+![Terminus v1.x Compatible](https://img.shields.io/badge/terminus-v1.x-green.svg)
 
 [![Packagist](https://img.shields.io/packagist/l/floe/terminus-pushcode.svg)](https://raw.githubusercontent.com/FloeDesignTechnologies/terminus-pushcode/master/LICENSE)
 
