@@ -2,7 +2,7 @@
 
 [![Terminus v1.x Compatible](https://img.shields.io/badge/terminus-v1.x-green.svg)](https://github.com/pantheon-systems/terminus-build-tools-plugin/tree/1.x)
 
-[![Packagist](https://img.shields.io/packagist/l/floe/terminus-pushcode.svg)]()
+[![Packagist](https://img.shields.io/packagist/l/floe/terminus-pushcode.svg)](https://raw.githubusercontent.com/FloeDesignTechnologies/terminus-pushcode/master/LICENSE)
 
 A Terminus plugin providing a single command to push code in the current working directory to a Pantheon environment.
 
