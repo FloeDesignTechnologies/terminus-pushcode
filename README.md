@@ -11,6 +11,12 @@ Instead, the main Git repository contains sources used to build what needs to be
 using Composer without commiting the vendor directory). This command can then be used after a complete build to
 push its result to a Pantheon environment.
 
+## Installation
+
+Install as a Terminus plugin (see https://pantheon.io/docs/terminus/plugins/).
+
+Code push to Pantheon is done with Git, this plugin requires a `git` executable usable from PHP (usually, being able to run `git` on the command line is all that is needed).
+
 ## Configuration
 
 When pushing code to Pantheon, using Git, the command rely on a `.pantheonignore` file in the current folder. This
