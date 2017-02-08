@@ -11,6 +11,8 @@ Instead, the main Git repository contains sources used to build what needs to be
 using Composer without commiting the vendor directory). This command can then be used after a complete build to
 push its result to a Pantheon environment.
 
+Note: The command should be updated to not require the current working direcotry to be a Git repository, see https://github.com/FloeDesignTechnologies/terminus-pushcode/issues/3
+
 ## Installation
 
 Install as a Terminus plugin (see https://pantheon.io/docs/terminus/plugins/).
